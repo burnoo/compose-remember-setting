@@ -22,10 +22,18 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(compose.ui)
+            implementation(libs.kotlinx.coroutines.core)
             implementation(libs.multiplatformSettings.core)
             implementation(libs.multiplatformSettings.coroutines)
             implementation(libs.multiplatformSettings.makeObservable)
             implementation(libs.multiplatformSettings.noarg)
+        }
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
+            implementation(libs.kotlinx.coroutines.test)
+            implementation(libs.multiplatformSettings.test)
+            implementation(libs.kotest.assertions)
+            implementation(libs.turbine)
         }
     }
 }
