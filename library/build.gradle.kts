@@ -22,6 +22,10 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(compose.ui)
+            implementation(libs.multiplatformSettings.core)
+            implementation(libs.multiplatformSettings.coroutines)
+            implementation(libs.multiplatformSettings.makeObservable)
+            implementation(libs.multiplatformSettings.noarg)
         }
     }
 }
