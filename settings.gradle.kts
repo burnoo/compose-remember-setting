@@ -27,6 +27,11 @@ dependencyResolutionManagement {
             }
         }
         mavenCentral()
+        maven(url = "https://pkgs.dev.azure.com/burnoo/maven/_packaging/public/maven/v1") {
+            content {
+                includeVersionByRegex(".*", ".*", ".*-beap[0-9]+")
+            }
+        }
     }
 }
 
