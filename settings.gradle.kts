@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 rootProject.name = "compose-remember-setting"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
@@ -28,4 +30,5 @@ dependencyResolutionManagement {
     }
 }
 
+include(":library")
 include(":example:composeApp")
