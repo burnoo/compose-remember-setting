@@ -10,9 +10,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
-
-import compose_remember_setting.composeapp.generated.resources.Res
-import compose_remember_setting.composeapp.generated.resources.compose_multiplatform
+import compose_remember_setting.example.composeapp.generated.resources.Res
+import compose_remember_setting.example.composeapp.generated.resources.compose_multiplatform
 
 @Composable
 @Preview
