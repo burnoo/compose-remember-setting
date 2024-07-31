@@ -1,3 +1,7 @@
+
+import org.jetbrains.compose.ExperimentalComposeLibrary
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree
 import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 
 plugins {
@@ -8,7 +12,10 @@ plugins {
 }
 
 kotlin {
-    androidTarget()
+    androidTarget {
+        @OptIn(ExperimentalKotlinGradlePluginApi::class)
+        instrumentedTestVariant.sourceSetTree.set(KotlinSourceSetTree.test)
+    }
 
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs()
@@ -20,7 +27,9 @@ kotlin {
     iosSimulatorArm64()
 
     sourceSets {
+        val desktopTest by getting
         commonMain.dependencies {
+            implementation(compose.runtime)
             implementation(compose.ui)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.multiplatformSettings.core)
@@ -34,6 +43,15 @@ kotlin {
             implementation(libs.multiplatformSettings.test)
             implementation(libs.kotest.assertions)
             implementation(libs.turbine)
+            implementation(compose.foundation)
+            @OptIn(ExperimentalComposeLibrary::class)
+            implementation(compose.uiTest)
+        }
+        desktopTest.dependencies {
+            implementation(compose.desktop.currentOs)
+        }
+        wasmJsTest.dependencies {
+            implementation("org.jetbrains.skiko:skiko-js-wasm-runtime:0.8.9")
         }
     }
 }
@@ -44,6 +62,7 @@ android {
 
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     packaging {
         resources {
@@ -59,3 +78,7 @@ android {
     }
 }
 
+dependencies {
+    androidTestImplementation(libs.androidx.compose.test.junit4)
+    debugImplementation(libs.androidx.compose.test.manifest)
+}
