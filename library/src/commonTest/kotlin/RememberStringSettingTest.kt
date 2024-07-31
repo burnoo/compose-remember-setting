@@ -79,5 +79,20 @@ class RememberStringSettingTest {
         assertString("newValue")
         settings.get<String>(key) shouldBe "newValue"
     }
+
+    @Test
+    fun shouldSyncTwoStringSettings() = runSettingsTest<String>(settings) {
+        rememberMutableState = { rememberStringSetting(key, "defaultValue") }
+
+        setUpContent {
+            val secondStringSetting = rememberStringSetting(key, "defaultValue2")
+            LaunchedEffect(Unit) {
+                secondStringSetting.value = "newValue"
+            }
+        }
+
+        assertString("newValue")
+        settings.get<String>(key) shouldBe "newValue"
+    }
 }
 
