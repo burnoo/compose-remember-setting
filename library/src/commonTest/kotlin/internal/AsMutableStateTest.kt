@@ -1,5 +1,3 @@
-@file:Suppress("PackageDirectoryMismatch")
-
 package dev.burnoo.compose.remembersetting.internal
 
 import io.kotest.matchers.shouldBe

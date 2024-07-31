@@ -30,7 +30,6 @@ kotlin {
         val desktopTest by getting
         commonMain.dependencies {
             implementation(compose.runtime)
-            implementation(compose.ui)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.multiplatformSettings.core)
             implementation(libs.multiplatformSettings.coroutines)
@@ -49,9 +48,6 @@ kotlin {
         }
         desktopTest.dependencies {
             implementation(compose.desktop.currentOs)
-        }
-        wasmJsTest.dependencies {
-            implementation("org.jetbrains.skiko:skiko-js-wasm-runtime:0.8.9")
         }
     }
 }

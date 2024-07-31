@@ -1,12 +1,9 @@
-@file:Suppress("PackageDirectoryMismatch")
-
 package dev.burnoo.compose.remembersetting.internal
 
 import app.cash.turbine.test
 import com.russhwolf.settings.ExperimentalSettingsApi
 import com.russhwolf.settings.MapSettings
 import com.russhwolf.settings.coroutines.toFlowSettings
-import com.russhwolf.settings.observable.makeObservable
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.Dispatchers
@@ -16,9 +13,7 @@ import kotlin.test.Test
 @OptIn(ExperimentalSettingsApi::class)
 class GetValueOrNullFlowTest {
 
-    private val flowSettings = MapSettings()
-        .makeObservable()
-        .toFlowSettings(dispatcher = Dispatchers.Unconfined)
+    private val flowSettings = MapSettings().toFlowSettings(dispatcher = Dispatchers.Unconfined)
     private val key = "key"
 
     @Test
