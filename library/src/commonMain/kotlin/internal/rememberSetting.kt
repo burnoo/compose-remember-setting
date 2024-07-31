@@ -7,14 +7,12 @@ import androidx.compose.runtime.rememberCoroutineScope
 import com.russhwolf.settings.ExperimentalSettingsApi
 import com.russhwolf.settings.coroutines.toFlowSettings
 import com.russhwolf.settings.set
-import dev.burnoo.compose.remembersetting.LocalFlowSettingsDispatcher
-import dev.burnoo.compose.remembersetting.LocalObservableSettings
+import dev.burnoo.compose.remembersetting.LocalComposeRememberSettingConfig
 
 @OptIn(ExperimentalSettingsApi::class)
 @Composable
 internal inline fun <reified T> rememberSetting(key: String, defaultValue: T): MutableState<T> {
-    val observableSettings = LocalObservableSettings.current
-    val flowSettingsDispatcher = LocalFlowSettingsDispatcher.current
+    val (observableSettings, flowSettingsDispatcher) = LocalComposeRememberSettingConfig.current
     val coroutineScope = rememberCoroutineScope()
     return remember {
         val flowSettings = if (flowSettingsDispatcher == null) {

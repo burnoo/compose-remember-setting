@@ -11,8 +11,8 @@ import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.onNodeWithTag
 import com.russhwolf.settings.ObservableSettings
-import dev.burnoo.compose.remembersetting.LocalFlowSettingsDispatcher
-import dev.burnoo.compose.remembersetting.LocalObservableSettings
+import dev.burnoo.compose.remembersetting.ComposeRememberSettingConfig
+import dev.burnoo.compose.remembersetting.LocalComposeRememberSettingConfig
 import kotlinx.coroutines.Dispatchers
 
 @OptIn(ExperimentalTestApi::class)
@@ -25,7 +25,7 @@ class SettingsComposeUiTest<T>(
 
     fun setUpContent(extraContent: @Composable ((mutableState: MutableState<T>) -> Unit)? = null) {
         composeUiTest.setContent {
-            CompositionLocalTestWrapper(settings) {
+            CompositionLocalTestConfigWrapper(settings) {
                 val mutableState = rememberMutableState()
                 BasicText(mutableState.value.toString(), modifier = Modifier.testTag(TAG))
                 extraContent?.invoke(mutableState)
@@ -43,10 +43,12 @@ class SettingsComposeUiTest<T>(
 }
 
 @Composable
-private fun CompositionLocalTestWrapper(observableSettings: ObservableSettings, content: @Composable () -> Unit) {
-    CompositionLocalProvider(LocalObservableSettings provides observableSettings) {
-        CompositionLocalProvider(LocalFlowSettingsDispatcher provides Dispatchers.Unconfined) {
-            content()
-        }
-    }
+private fun CompositionLocalTestConfigWrapper(observableSettings: ObservableSettings, content: @Composable () -> Unit) {
+    CompositionLocalProvider(
+        LocalComposeRememberSettingConfig provides ComposeRememberSettingConfig(
+            observableSettings = observableSettings,
+            flowSettingsDispatcher = Dispatchers.Unconfined
+        ),
+        content = content
+    )
 }
