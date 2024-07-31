@@ -28,10 +28,10 @@ kotlin {
     sourceSets {
         val desktopTest by getting
         commonMain.dependencies {
+            api(libs.kotlinx.coroutines.core)
+            api(libs.multiplatformSettings.core)
+            api(libs.multiplatformSettings.coroutines)
             implementation(compose.runtime)
-            implementation(libs.kotlinx.coroutines.core)
-            implementation(libs.multiplatformSettings.core)
-            implementation(libs.multiplatformSettings.coroutines)
             implementation(libs.multiplatformSettings.makeObservable)
             implementation(libs.multiplatformSettings.noarg)
         }
