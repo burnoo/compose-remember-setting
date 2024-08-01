@@ -95,4 +95,3 @@ class RememberLongSettingTest {
         settings.get<Long>(key) shouldBe 1L
     }
 }
-

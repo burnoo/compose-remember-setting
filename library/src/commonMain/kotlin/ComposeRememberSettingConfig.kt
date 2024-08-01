@@ -16,5 +16,5 @@ data class ComposeRememberSettingConfig(
      * Default null value uses [com.russhwolf.settings.coroutines.converterDefaultDispatcher]
      * which is Dispatchers.Default for wasm and Dispatchers.IO for all others platforms
      */
-    val flowSettingsDispatcher: CoroutineDispatcher? = null
+    val flowSettingsDispatcher: CoroutineDispatcher? = null,
 )

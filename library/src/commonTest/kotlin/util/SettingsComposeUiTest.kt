@@ -60,8 +60,8 @@ private fun CompositionLocalTestConfigWrapper(observableSettings: ObservableSett
     CompositionLocalProvider(
         LocalComposeRememberSettingConfig provides ComposeRememberSettingConfig(
             observableSettings = observableSettings,
-            flowSettingsDispatcher = Dispatchers.Unconfined
+            flowSettingsDispatcher = Dispatchers.Unconfined,
         ),
-        content = content
+        content = content,
     )
 }

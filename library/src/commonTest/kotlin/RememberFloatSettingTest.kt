@@ -95,4 +95,3 @@ class RememberFloatSettingTest {
         settings.get<Float>(key) shouldBe 1f
     }
 }
-

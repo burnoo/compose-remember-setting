@@ -117,4 +117,3 @@ class RememberStringSettingTest {
         assertString("key2Value")
     }
 }
-

@@ -95,4 +95,3 @@ class RememberIntSettingTest {
         settings.get<Int>(key) shouldBe 1
     }
 }
-

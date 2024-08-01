@@ -2,7 +2,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.Checkbox
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
@@ -38,7 +42,7 @@ private fun Counter() {
         Text(
             counter.toString(),
             style = MaterialTheme.typography.h3.copy(textAlign = TextAlign.Center),
-            modifier = Modifier.defaultMinSize(minWidth = 120.dp)
+            modifier = Modifier.defaultMinSize(minWidth = 120.dp),
         )
         Button(onClick = { counter++ }) { Text("+") }
     }

@@ -95,4 +95,3 @@ class RememberBooleanSettingTest {
         settings.get<Boolean>(key) shouldBe true
     }
 }
-

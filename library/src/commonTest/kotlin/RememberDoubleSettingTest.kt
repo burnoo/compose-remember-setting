@@ -95,4 +95,3 @@ class RememberDoubleSettingTest {
         settings.get<Double>(key) shouldBe 1.0
     }
 }
-
