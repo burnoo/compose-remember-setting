@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.stateIn
 internal inline fun <reified T> FlowSettings.getStateFlow(
     coroutineScope: CoroutineScope,
     key: String,
-    defaultValue: T,
+    initialValue: T,
 ) = getValueOrNullFlow<T>(key)
     .filterNotNull()
-    .stateIn(coroutineScope, started = SharingStarted.Eagerly, defaultValue)
+    .stateIn(coroutineScope, started = SharingStarted.Eagerly, initialValue)

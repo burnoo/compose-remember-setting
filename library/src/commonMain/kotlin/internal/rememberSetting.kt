@@ -6,6 +6,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import com.russhwolf.settings.ExperimentalSettingsApi
 import com.russhwolf.settings.coroutines.toFlowSettings
+import com.russhwolf.settings.get
 import com.russhwolf.settings.set
 import dev.burnoo.compose.remembersetting.LocalComposeRememberSettingConfig
 
@@ -20,7 +21,8 @@ internal inline fun <reified T> rememberSetting(key: String, defaultValue: T): M
         } else {
             observableSettings.toFlowSettings(flowSettingsDispatcher)
         }
-        flowSettings.getStateFlow(coroutineScope, key, defaultValue)
+        val initialValue: T = observableSettings[key] ?: defaultValue
+        flowSettings.getStateFlow(coroutineScope, key, initialValue)
             .asMutableState(coroutineScope, setValue = { observableSettings[key] = it })
     }
 }

@@ -19,7 +19,7 @@ class GetStateFlowTest {
 
     @Test
     fun shouldGetStateFlow() = runTest {
-        val stateFlow = flowSettings.getStateFlow(testScope, key, defaultValue = 0)
+        val stateFlow = flowSettings.getStateFlow(testScope, key, initialValue = 0)
 
         stateFlow.test {
             awaitItem() shouldBe 0
@@ -30,7 +30,7 @@ class GetStateFlowTest {
 
     @Test
     fun shouldGetNullableStateFlow() = runTest {
-        val stateFlow = flowSettings.getStateFlow<Int?>(testScope, key, defaultValue = null)
+        val stateFlow = flowSettings.getStateFlow<Int?>(testScope, key, initialValue = null)
 
         stateFlow.test {
             awaitItem() shouldBe null
