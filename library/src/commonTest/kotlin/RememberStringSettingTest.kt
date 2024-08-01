@@ -1,6 +1,10 @@
 package dev.burnoo.compose.remembersetting
 
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import com.russhwolf.settings.MapSettings
 import com.russhwolf.settings.get
 import com.russhwolf.settings.set
@@ -93,6 +97,24 @@ class RememberStringSettingTest {
 
         assertString("newValue")
         settings.get<String>(key) shouldBe "newValue"
+    }
+
+    @Test
+    fun shouldChangeValueOnKeyChange() = runSettingsTest<String>(settings) {
+        val key1 = "key1"
+        val key2 = "key2"
+        overrideContent {
+            var key by remember { mutableStateOf(key1) }
+            var text by rememberStringSetting(key, "defaultValue")
+            TestText(text)
+            LaunchedEffect(Unit) {
+                text = "key1Value"
+                key = key2
+            }
+        }
+
+        settings[key2] = "key2Value"
+        assertString("key2Value")
     }
 }
 

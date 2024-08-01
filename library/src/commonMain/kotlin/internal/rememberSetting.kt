@@ -15,7 +15,7 @@ import dev.burnoo.compose.remembersetting.LocalComposeRememberSettingConfig
 internal inline fun <reified T> rememberSetting(key: String, defaultValue: T): MutableState<T> {
     val (observableSettings, flowSettingsDispatcher) = LocalComposeRememberSettingConfig.current
     val coroutineScope = rememberCoroutineScope()
-    return remember {
+    return remember(key) {
         val flowSettings = if (flowSettingsDispatcher == null) {
             observableSettings.toFlowSettings()
         } else {

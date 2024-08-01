@@ -23,12 +23,25 @@ class SettingsComposeUiTest<T>(
 
     lateinit var rememberMutableState: @Composable () -> MutableState<T>
 
+    @Composable
+    fun TestText(text: String) {
+        BasicText(text, modifier = Modifier.testTag(TAG))
+    }
+
     fun setUpContent(extraContent: @Composable ((mutableState: MutableState<T>) -> Unit)? = null) {
         composeUiTest.setContent {
             CompositionLocalTestConfigWrapper(settings) {
                 val mutableState = rememberMutableState()
-                BasicText(mutableState.value.toString(), modifier = Modifier.testTag(TAG))
+                TestText(mutableState.value.toString())
                 extraContent?.invoke(mutableState)
+            }
+        }
+    }
+
+    fun overrideContent(content: @Composable () -> Unit) {
+        composeUiTest.setContent {
+            CompositionLocalTestConfigWrapper(settings) {
+                content()
             }
         }
     }
