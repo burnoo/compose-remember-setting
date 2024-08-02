@@ -15,7 +15,7 @@ plugins {
 }
 
 group = "dev.burnoo"
-version = "0.1.0"
+version = "0.1.0-SNAPSHOT"
 
 kotlin {
     androidTarget {
@@ -87,7 +87,29 @@ dependencies {
     debugImplementation(libs.androidx.compose.test.manifest)
 }
 
+// Publishing configuration below
+val currentProperties = rootProject.file("local.properties")
+    .run { if (exists()) Properties().apply { load(reader()) } else properties }
+
+val isRelease: Boolean
+    get() = currentProperties["isRelease"]?.toString()?.toBoolean() == true
+
 extensions.findByType<PublishingExtension>()?.apply {
+    repositories {
+        maven {
+            name = "sonatype"
+            val repositoryUrl = if (isRelease) {
+                "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+            } else {
+                "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+            }
+            url = uri(repositoryUrl)
+            credentials {
+                username = currentProperties["sonatypeUsername"]?.toString()
+                password = currentProperties["sonatypePassword"]?.toString()
+            }
+        }
+    }
     publications.withType<MavenPublication>().configureEach {
         val publication = this
         val dokkaJar = project.tasks.register("${publication.name}DokkaJar", Jar::class) {
@@ -100,6 +122,9 @@ extensions.findByType<PublishingExtension>()?.apply {
             name = project.name
             description = "Compose Multiplatform library for remembering state persistently (based on Multiplatform Settings)"
             url = "https://github.com/burnoo/compose-remember-setting"
+            if (isRelease) {
+                version = version.replace("-SNAPSHOT", "")
+            }
 
             licenses {
                 license {
@@ -126,12 +151,9 @@ extensions.findByType<PublishingExtension>()?.apply {
     }
 }
 
-val currentProperties = rootProject.file("local.properties")
-    .run { if (exists()) Properties().apply { load(reader()) } else properties }
-
 signing {
-    val key = currentProperties["signing.key"]?.toString()?.replace("\\n", "\n")
-    val password = currentProperties["signing.password"]?.toString()
+    val key = currentProperties["signingKey"]?.toString()?.replace("\\n", "\n")
+    val password = currentProperties["signingPassword"]?.toString()
     useInMemoryPgpKeys(key, password)
     sign(publishing.publications)
 }
