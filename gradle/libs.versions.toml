@@ -7,6 +7,7 @@ androidx-activityCompose = "1.9.1"
 androidx-compose = "1.6.8"
 compose-plugin = "1.6.11"
 coroutines = "1.9.0-RC"
+dokka = "1.9.20"
 kotlin = "2.0.0"
 kotest = "5.9.1"
 multiplatformSettings = "1.2.0-beap1"
@@ -32,6 +33,7 @@ turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
-jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }

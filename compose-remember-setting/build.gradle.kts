@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.dokka)
     `maven-publish`
 }
 
@@ -82,9 +83,16 @@ dependencies {
     debugImplementation(libs.androidx.compose.test.manifest)
 }
 
+val javadocJar by tasks.registering(Jar::class) {
+    archiveClassifier.set("javadoc")
+    dependsOn("dokkaHtml")
+    from("${layout.buildDirectory}/dokka/html")
+}
+
 extensions.findByType<PublishingExtension>()?.apply {
     publications.withType<MavenPublication>().configureEach {
         pom {
+            artifact(javadocJar)
             name = project.name
             description = "Compose Multiplatform library for remembering state persistently (based on Multiplatform Settings)"
             url = "https://github.com/burnoo/compose-remember-setting"
