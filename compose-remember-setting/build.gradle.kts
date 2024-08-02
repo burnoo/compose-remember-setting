@@ -87,12 +87,6 @@ dependencies {
     debugImplementation(libs.androidx.compose.test.manifest)
 }
 
-val javadocJar by tasks.registering(Jar::class) {
-    archiveClassifier.set("javadoc")
-    dependsOn("dokkaHtml")
-    from("${layout.buildDirectory}/dokka/html")
-}
-
 extensions.findByType<PublishingExtension>()?.apply {
     publications.withType<MavenPublication>().configureEach {
         val publication = this
