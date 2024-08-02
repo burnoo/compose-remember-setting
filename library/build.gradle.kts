@@ -8,7 +8,11 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
+    `maven-publish`
 }
+
+group = "dev.burnoo"
+version = "0.1.0"
 
 kotlin {
     androidTarget {
@@ -76,4 +80,37 @@ android {
 dependencies {
     androidTestImplementation(libs.androidx.compose.test.junit4)
     debugImplementation(libs.androidx.compose.test.manifest)
+}
+
+extensions.findByType<PublishingExtension>()?.apply {
+    publications.withType<MavenPublication>().configureEach {
+        pom {
+            name = rootProject.name
+            artifactId = rootProject.name
+            description = "Compose Multiplatform library for remembering state persistently (based on Multiplatform Settings)"
+            url = "https://github.com/burnoo/compose-remember-setting"
+
+            licenses {
+                license {
+                    name = "The Apache License, Version 2.0"
+                    url = "https://www.apache.org/licenses/LICENSE-2.0"
+                }
+            }
+
+            developers {
+                developer {
+                    id = "burnoo"
+                    name = "Bruno Wieczorek"
+                    url = "https://burnoo.dev"
+                    email = "bruno.wieczorek@gmail.com"
+                }
+            }
+
+            scm {
+                connection = "scm:git:git@github.com:burnoo/compose-remember-setting.git"
+                url = "https://github.com/burnoo/compose-remember-setting"
+                tag = "HEAD"
+            }
+        }
+    }
 }
