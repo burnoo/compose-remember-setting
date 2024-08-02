@@ -85,8 +85,7 @@ dependencies {
 extensions.findByType<PublishingExtension>()?.apply {
     publications.withType<MavenPublication>().configureEach {
         pom {
-            name = rootProject.name
-            artifactId = rootProject.name
+            name = project.name
             description = "Compose Multiplatform library for remembering state persistently (based on Multiplatform Settings)"
             url = "https://github.com/burnoo/compose-remember-setting"
 

@@ -58,7 +58,7 @@ kotlin {
             implementation(libs.androidx.activity.compose)
         }
         commonMain.dependencies {
-            implementation(projects.library)
+            implementation(projects.composeRememberSetting)
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material)

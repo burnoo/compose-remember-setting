@@ -35,5 +35,5 @@ dependencyResolutionManagement {
     }
 }
 
-include(":library")
+include(":compose-remember-setting")
 include(":example:composeApp")
