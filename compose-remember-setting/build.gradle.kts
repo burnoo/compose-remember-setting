@@ -2,6 +2,7 @@ import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree
 import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -10,6 +11,7 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.dokka)
     `maven-publish`
+    signing
 }
 
 group = "dev.burnoo"
@@ -91,8 +93,14 @@ val javadocJar by tasks.registering(Jar::class) {
 
 extensions.findByType<PublishingExtension>()?.apply {
     publications.withType<MavenPublication>().configureEach {
+        val publication = this
+        val dokkaJar = project.tasks.register("${publication.name}DokkaJar", Jar::class) {
+            archiveClassifier.set("javadoc")
+            from(tasks.named("dokkaHtml"))
+            archiveBaseName.set("${archiveBaseName.get()}-${publication.name}")
+        }
+        artifact(dokkaJar)
         pom {
-            artifact(javadocJar)
             name = project.name
             description = "Compose Multiplatform library for remembering state persistently (based on Multiplatform Settings)"
             url = "https://github.com/burnoo/compose-remember-setting"
@@ -120,4 +128,14 @@ extensions.findByType<PublishingExtension>()?.apply {
             }
         }
     }
+}
+
+val currentProperties = rootProject.file("local.properties")
+    .run { if (exists()) Properties().apply { load(reader()) } else properties }
+
+signing {
+    val key = currentProperties["signing.key"]?.toString()?.replace("\\n", "\n")
+    val password = currentProperties["signing.password"]?.toString()
+    useInMemoryPgpKeys(key, password)
+    sign(publishing.publications)
 }
