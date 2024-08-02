@@ -58,7 +58,7 @@ kotlin {
             implementation(libs.androidx.activity.compose)
         }
         commonMain.dependencies {
-            implementation(projects.composeRememberSetting)
+            implementation(project(":compose-remember-setting"))
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material)
