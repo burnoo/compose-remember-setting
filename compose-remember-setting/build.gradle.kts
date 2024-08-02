@@ -19,6 +19,8 @@ version = "0.1.0"
 
 kotlin {
     androidTarget {
+        publishLibraryVariants("release", "debug")
+
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         instrumentedTestVariant.sourceSetTree.set(KotlinSourceSetTree.test)
     }
