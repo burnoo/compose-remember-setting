@@ -1,0 +1,21 @@
+name: Prepare release
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        type: choice
+        description: Version to bump
+        options:
+          - minor
+          - major
+jobs:
+  prepare-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Run bump version script
+        run: ./scripts/bump-version.sh ${{ github.event.inputs.name }}
+      - name: Echo new version
+        run: echo $NEW_VERSION
