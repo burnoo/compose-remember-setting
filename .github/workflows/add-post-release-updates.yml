@@ -35,3 +35,4 @@ jobs:
           commit-message: |
             [skip ci] Update version in README and bump to ${{ env.NEW_VERSION }}-SNAPSHOT
           branch: post-release-updates/${{ github.event.release.tag_name }}
+          base: main
