@@ -6,6 +6,6 @@ WIP 🚧
 
 ```kotlin
 dependencies {
-    implementation("dev.burnoo:compose-remember-setting:0.0.0")
+    implementation("dev.burnoo:compose-remember-setting:0.0.1")
 }
 ```
