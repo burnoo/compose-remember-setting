@@ -1,4 +1,4 @@
-name: Post-release updates
+name: Post-Release updates
 
 permissions:
   contents: write
