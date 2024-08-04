@@ -1,0 +1,47 @@
+name: Release Library
+
+on:
+  workflow_dispatch:
+
+env:
+  ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.SONATYPE_USERNAME }}
+  ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.SONATYPE_PASSWORD }}
+  ORG_GRADLE_PROJECT_signingKey: ${{ secrets.SIGNING_KEY }}
+  ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.SIGNING_PASSWORD }}
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'corretto'
+          java-version: '17'
+
+      - name: Set up Gradle
+        uses: gradle/gradle-build-action@v3
+
+#      - name: Publish artifacts to Sonatype
+#        run: ./gradlew publishAllPublicationsToSonatypeRepository
+
+      - name: Extract version from build.gradle.kts
+        id: extract_version
+        run: |
+          version=$(sed -n 's/.*version = "\([0-9.]*\).*/\1/p' compose-remember-setting/build.gradle.kts)
+          echo "VERSION=$version" >> $GITHUB_ENV
+
+      - name: Create GitHub Release
+        uses: ncipollo/release-action@v1
+        with:
+          token: ${{ secrets.TOKEN_RELEASES }}
+          tag: ${{ env.VERSION }}
+          commit: ${{ github.sha }}
+          generateReleaseNotes: true
+          makeLatest: true
