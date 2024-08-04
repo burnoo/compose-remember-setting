@@ -26,6 +26,6 @@ jobs:
         with:
           title: |
             [skip ci] Prepare the release (${{ env.NEW_VERSION }})
-          body: Prepare the release (${{ env.NEW_VERSION }}) by bumping version in code.
+          body: Prepare the release (`${{ env.NEW_VERSION }}`) by bumping version in code.
           commit-message: Bump library version to ${{ env.NEW_VERSION }}-SNAPSHOT
           branch: prepare-release/${{ env.NEW_VERSION }}
