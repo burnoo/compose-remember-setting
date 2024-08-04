@@ -20,10 +20,8 @@ jobs:
         run: ./scripts/bump-version.sh patch
 
       - name: Update README with current version
-        uses: MathieuSoysal/file-updater-for-release@v1.0.3
-        with:
-          files: README.md
-          prefix: 'dev.burnoo:compose-remember-setting:'
+        run: |
+          sed -i "s/dev.burnoo:compose-remember-setting:[0-9.]*/dev.burnoo:compose-remember-setting:${{ github.event.release.tag_name }}/g" README.md
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
