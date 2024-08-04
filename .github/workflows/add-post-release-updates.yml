@@ -8,6 +8,8 @@ on:
   release:
     types:
       - published
+  workflow_dispatch: 
+    
 
 jobs:
   post-release-updates:
@@ -21,17 +23,17 @@ jobs:
 
       - name: Update README with current version
         run: |
-          sed -i "s/dev.burnoo:compose-remember-setting:[0-9.]*/dev.burnoo:compose-remember-setting:${{ github.event.release.tag_name }}/g" README.md
+          sed -i "s/dev.burnoo:compose-remember-setting:[0-9.]*/dev.burnoo:compose-remember-setting:0.0.1/g" README.md
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
           title: |
-            Add post-release updates (`${{ github.event.release.tag_name }}`)
+            Add post-release updates (`0.0.1`)
           body: |
             Post-release updates:
-            - Update README with `${{ github.event.release.tag_name }}` version
+            - Update README with `0.0.1` version
             - Bump library version to `${{ env.NEW_VERSION }}-SNAPSHOT`
           commit-message: |
             [skip ci] Update version in README and bump to ${{ env.NEW_VERSION }}-SNAPSHOT
-          branch: post-release-updates/${{ github.event.release.tag_name }}
+          branch: post-release-updates/0.0.1
