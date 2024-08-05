@@ -5,7 +5,7 @@ closingRepository=$(
     --url https://s01.oss.sonatype.org/service/local/staging/bulk/close \
     --header 'Accept: application/json' \
     --header 'Content-Type: application/json' \
-    --data '{ "data" : {"stagedRepositoryIds":["'"$SONATYPE_REPOSITORY_ID"'"] } }'
+    --data '{ "data" : {"stagedRepositoryIds":["'"$SONATYPE_REPOSITORY_ID"'"], "description":"'"$SONATYPE_DESCRIPTION"'" } }'
 )
 
 if [ ! -z "$closingRepository" ]; then
