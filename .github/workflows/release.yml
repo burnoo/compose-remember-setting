@@ -39,7 +39,6 @@ jobs:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
           SONATYPE_STAGING_PROFILE_ID: ${{ secrets.SONATYPE_STAGING_PROFILE_ID }}
-          SONATYPE_DESCRIPTION: Created by $GITHUB_WORKFLOW ($GITHUB_ACTION) for $GITHUB_REPOSITORY
 
       - name: Publish artifacts to Sonatype
         id: publish
@@ -61,7 +60,6 @@ jobs:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
           SONATYPE_REPOSITORY_ID: ${{ steps.create-nexus-staging.outputs.repository_id }}
-          SONATYPE_DESCRIPTION: Closed by $GITHUB_WORKFLOW ($GITHUB_ACTION) for $GITHUB_REPOSITORY
 
       - name: Extract version from build.gradle.kts
         id: extract_version

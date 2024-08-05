@@ -4,8 +4,7 @@ jsonOutput=$(
   curl -s --request POST -u "$SONATYPE_USERNAME:$SONATYPE_PASSWORD" \
     --url https://s01.oss.sonatype.org/service/local/staging/profiles/"${SONATYPE_STAGING_PROFILE_ID}"/start \
     --header 'Accept: application/json' \
-    --header 'Content-Type: application/json' \
-    --data '{ "data": {"description" : "'"$SONATYPE_DESCRIPTION"'"} }'
+    --header 'Content-Type: application/json'
 )
 
 stagingRepositoryId=$(echo "$jsonOutput" | jq -r '.data.stagedRepositoryId')
