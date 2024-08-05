@@ -38,4 +38,10 @@ class GetStateFlowTest {
             awaitItem() shouldBe 1996
         }
     }
+
+    @Test
+    fun fakeTest(  )    {
+        false shouldBe true
+    }
 }
+
