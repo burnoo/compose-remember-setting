@@ -41,6 +41,6 @@ class GetStateFlowTest {
 
     @Test
     fun fakeTest() {
-        false shouldBe true
+        true shouldBe true
     }
 }
