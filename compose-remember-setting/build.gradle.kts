@@ -98,7 +98,14 @@ extensions.findByType<PublishingExtension>()?.apply {
     repositories {
         maven {
             name = "sonatype"
-            url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+            val repositoryId = currentProperties["sonatypeStagingRepositoryId"]?.toString()
+            url = uri(
+                if (repositoryId != null) {
+                    "https://s01.oss.sonatype.org/service/local/staging/deployByRepositoryId/$repositoryId/"
+                } else {
+                    "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+                },
+            )
             credentials {
                 username = currentProperties["sonatypeUsername"]?.toString()
                 password = currentProperties["sonatypePassword"]?.toString()
