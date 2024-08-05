@@ -7,7 +7,7 @@ WIP 🚧
 `build.gradle.kts`:
 ```kotlin
 dependencies {
-    implementation("dev.burnoo:compose-remember-setting:0.2.1")
+    implementation("dev.burnoo:compose-remember-setting:0.2.2")
 }
 ```
 
