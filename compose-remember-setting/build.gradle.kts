@@ -16,7 +16,7 @@ plugins {
 }
 
 group = "dev.burnoo"
-version = "0.2.3-SNAPSHOT"
+version = "0.3.0-SNAPSHOT"
 
 kotlin {
     androidTarget {
