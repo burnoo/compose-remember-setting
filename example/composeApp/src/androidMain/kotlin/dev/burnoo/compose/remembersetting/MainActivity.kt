@@ -1,6 +1,7 @@
 package dev.burnoo.compose.remembersetting
 
 import App
+import ComposeRememberSettingPreview
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -17,8 +18,10 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun AppAndroidPreview() {
-    App()
+private fun AppAndroidPreview() {
+    ComposeRememberSettingPreview("intKey" to 21, "booleanKey" to true) {
+        App()
+    }
 }

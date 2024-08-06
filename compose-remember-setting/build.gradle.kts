@@ -40,9 +40,10 @@ kotlin {
             api(libs.kotlinx.coroutines.core)
             api(libs.multiplatformSettings.core)
             api(libs.multiplatformSettings.coroutines)
-            implementation(compose.runtime)
+            api(compose.runtime)
             implementation(libs.multiplatformSettings.makeObservable)
             implementation(libs.multiplatformSettings.noarg)
+            implementation(libs.multiplatformSettings.test)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
