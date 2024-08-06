@@ -1,4 +1,5 @@
 import org.jetbrains.compose.ExperimentalComposeLibrary
+import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree
 import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
@@ -100,6 +101,12 @@ val currentProperties = rootProject.file("local.properties")
 
 val isRelease: Boolean
     get() = currentProperties["isRelease"]?.toString()?.toBoolean() == true
+
+tasks.withType<DokkaTask>().configureEach {
+    if (isRelease) {
+        moduleVersion = moduleVersion.get().replace("-SNAPSHOT", "")
+    }
+}
 
 extensions.findByType<PublishingExtension>()?.apply {
     repositories {
