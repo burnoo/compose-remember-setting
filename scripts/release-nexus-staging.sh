@@ -15,9 +15,9 @@ fi
 
 start=$(date +%s)
 while true ; do
-  # force timeout after 15 minutes
+  # force timeout after 30 minutes
   now=$(date +%s)
-  if [ $(( (now - start) / 60 )) -gt 15 ]; then
+  if [ $(( (now - start) / 60 )) -gt 30 ]; then
       echo "Closing process is to long, stopping the job (waiting for closing repository)."
       exit 1
   fi
