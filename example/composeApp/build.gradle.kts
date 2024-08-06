@@ -74,7 +74,7 @@ kotlin {
 }
 
 android {
-    namespace = "dev.burnoo.compose.remembersetting"
+    namespace = "dev.burnoo.compose.remembersetting.example"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
