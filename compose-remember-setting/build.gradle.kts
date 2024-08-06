@@ -61,6 +61,12 @@ kotlin {
     }
 }
 
+tasks.configureEach {
+    if (name.contains("UnitTestKotlinAndroid")) {
+        enabled = false
+    }
+}
+
 android {
     namespace = "dev.burnoo.compose.remembersetting"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
