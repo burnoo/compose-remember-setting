@@ -47,3 +47,11 @@ private fun Counter() {
         Button(onClick = { counter++ }) { Text("+") }
     }
 }
+
+@Preview
+@Composable
+private fun PreviewCounter() {
+    ComposeRememberSettingPreview("intKey" to 21) {
+        Counter()
+    }
+}
