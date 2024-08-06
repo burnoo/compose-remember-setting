@@ -7,7 +7,7 @@ Compose Multiplatform library for remembering state persistently based on [Multi
 The library is distributed through Maven Central. To use it, add the following dependency to your module `build.gradle.kts`:
 ```kotlin
 dependencies {
-    implementation("dev.burnoo:compose-remember-setting:0.2.2")
+    implementation("dev.burnoo:compose-remember-setting:0.3.0")
 }
 ```
 
