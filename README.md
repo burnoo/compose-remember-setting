@@ -3,6 +3,8 @@
 
 Compose Multiplatform library for remembering state persistently based on [Multiplatform Settings](https://github.com/russhwolf/multiplatform-settings). It's a persistent version of `remember { mutableStateOf(x) }`.
 
+Demo: https://burnoo.github.io/compose-remember-setting/
+
 ## Installation
 The library is distributed through Maven Central. To use it, add the following dependency to your module `build.gradle.kts`:
 ```kotlin
