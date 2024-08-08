@@ -9,11 +9,12 @@ import com.russhwolf.settings.coroutines.toFlowSettings
 import com.russhwolf.settings.get
 import com.russhwolf.settings.set
 import dev.burnoo.compose.remembersetting.LocalComposeRememberSettingConfig
+import dev.burnoo.compose.remembersetting.requireCurrent
 
 @OptIn(ExperimentalSettingsApi::class)
 @Composable
 internal inline fun <reified T> rememberSetting(key: String, defaultValue: T): MutableState<T> {
-    val (observableSettings, flowSettingsDispatcher) = LocalComposeRememberSettingConfig.current
+    val (observableSettings, flowSettingsDispatcher) = LocalComposeRememberSettingConfig.requireCurrent()
     val coroutineScope = rememberCoroutineScope()
     return remember(key) {
         val flowSettings = if (flowSettingsDispatcher == null) {

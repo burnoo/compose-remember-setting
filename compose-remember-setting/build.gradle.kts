@@ -42,6 +42,7 @@ kotlin {
             api(libs.multiplatformSettings.core)
             api(libs.multiplatformSettings.coroutines)
             api(compose.runtime)
+            implementation(compose.ui)
             implementation(libs.multiplatformSettings.makeObservable)
             implementation(libs.multiplatformSettings.noarg)
             implementation(libs.multiplatformSettings.test)
