@@ -9,23 +9,9 @@ Demo: https://burnoo.github.io/compose-remember-setting/
 The library is distributed through Maven Central. To use it, add the following dependency to your module `build.gradle.kts`:
 ```kotlin
 dependencies {
-    implementation("dev.burnoo:compose-remember-setting:0.3.1")
+    implementation("dev.burnoo:compose-remember-setting:1.0.0")
 }
 ```
-
-Unfortunately version 1.2.0 of Multiplatform Settings is not officially released yet. I have published it unofficially as [1.2.0-beap1](https://github.com/burnoo/multiplatform-settings) to [my public maven](https://github.com/burnoo/maven). To use `compose-remember-setting` it's also necessary to include my maven in `settings.gradle.kts`:
-```kotlin
-dependencyResolutionManagement {
-    repositories {
-        maven(url = "https://pkgs.dev.azure.com/burnoo/maven/_packaging/public/maven/v1") {
-            content {
-                includeVersionByRegex(".*", ".*", ".*-beap[0-9]+")
-            }
-        }
-    }
-}
-```
-I plan to remove this requirement once `1.2.0` is officially released and will then release `compose-remember-setting:1.0.0`.
 
 ## Usage
 To store mutable state in `@Composable` when the app is running, you usually use `remember { mutableStateOf(x) }`. This library provides the same functionality but supports data persistence, saving, and restoring data using Multiplatform Settings.
