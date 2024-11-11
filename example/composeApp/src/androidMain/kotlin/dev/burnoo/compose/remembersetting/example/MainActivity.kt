@@ -1,4 +1,4 @@
-package dev.burnoo.compose.remembersetting
+package dev.burnoo.compose.remembersetting.example
 
 import App
 import ComposeRememberSettingPreview
