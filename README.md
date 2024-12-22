@@ -9,7 +9,7 @@ Demo: https://burnoo.github.io/compose-remember-setting/
 The library is distributed through Maven Central. To use it, add the following dependency to your module `build.gradle.kts`:
 ```kotlin
 dependencies {
-    implementation("dev.burnoo:compose-remember-setting:1.0.1")
+    implementation("dev.burnoo:compose-remember-setting:1.0.2")
 }
 ```
 
