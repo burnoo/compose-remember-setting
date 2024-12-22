@@ -1,8 +1,8 @@
+
 import org.jetbrains.compose.ExperimentalComposeLibrary
-import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree
-import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 import java.util.Properties
 
 plugins {
@@ -103,7 +103,7 @@ val currentProperties = rootProject.file("local.properties")
 val isRelease: Boolean
     get() = currentProperties["isRelease"]?.toString()?.toBoolean() == true
 
-tasks.withType<DokkaTask>().configureEach {
+dokka {
     if (isRelease) {
         moduleVersion = moduleVersion.get().replace("-SNAPSHOT", "")
     }
@@ -139,7 +139,7 @@ extensions.findByType<PublishingExtension>()?.apply {
         val publication = this
         val dokkaJar = project.tasks.register("${publication.name}DokkaJar", Jar::class) {
             archiveClassifier.set("javadoc")
-            from(tasks.named("dokkaHtml"))
+            from(tasks.named("dokkaGeneratePublicationHtml"))
             archiveBaseName.set("${archiveBaseName.get()}-${publication.name}")
         }
         artifact(dokkaJar)
